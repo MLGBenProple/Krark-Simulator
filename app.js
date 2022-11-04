@@ -1,19 +1,19 @@
-var num_of_krark = 0
-var num_of_veyren = 0
-var num_of_prodegy = 0
-var num_of_storm_kiln = 0
-var num_of_archmage = 0
-var num_of_bergi = 0
-var num_of_scoundrel = 0
-var num_of_thumbs = 0
-var storm_count = 0
-var cast_limit = 0
-var treasures = 0
-var blue_mana = 0
-var red_mana = 0
-var magecraft_plus = 0
-var draw_cards = 0
-var num_of_copies = 0
+var num_of_krark = parseFloat(0)
+var num_of_veyren = parseFloat(0)
+var num_of_prodigy = parseFloat(0)
+var num_of_storm_kiln = parseFloat(0)
+var num_of_archmage = parseFloat(0)
+var num_of_bergi = parseFloat(0)
+var num_of_scoundrel = parseFloat(0)
+var num_of_thumbs = parseFloat(0)
+var storm_count = parseFloat(0)
+var cast_limit = parseFloat(0)
+var treasures = parseFloat(0)
+var blue_mana = parseFloat(0)
+var red_mana = parseFloat(0)
+var magecraft_plus = parseFloat(0)
+var draw_cards = parseFloat(0)
+var num_of_copies = parseFloat(0)
 var spell_is_back_in_hand = true
 var toss = []
 var toss_grouped_by_thumb = []
@@ -52,15 +52,15 @@ function copySpell() {
 }
 
 function krarkTriggers() {
-    if (num_of_veyren != 0 || num_of_prodegy != 0) {
-        for (let i = 0; i <= parseFloat(num_of_veyren) + parseFloat(num_of_prodegy); i++) {
+    if (num_of_veyren != 0 || num_of_prodigy != 0) {
+        for (let i = 0; i <= (num_of_veyren + num_of_prodigy); i++) {
             for (let i = 0; i < num_of_krark; i++) {
                 if (num_of_thumbs > 0) {
                     var result = tossMultipleCoins(num_of_thumbs)
-                    if (result == (parseFloat(num_of_thumbs) + 1) * -1) {
+                    if (result == (num_of_thumbs + 1) * -1) {
                         spell_is_back_in_hand = true
                     }
-                    else if (result == parseFloat(num_of_thumbs) + 1) {
+                    else if (result == num_of_thumbs + 1) {
                         copySpell()
                         for (let i = 0; i < num_of_scoundrel; i++) {
                             treasures++
@@ -94,10 +94,10 @@ function krarkTriggers() {
         for (let i = 0; i < num_of_krark; i++) {
             if (num_of_thumbs > 0) {
                 var result = tossMultipleCoins(num_of_thumbs)
-                if (result == (parseFloat(num_of_thumbs) + 1) * -1) {
+                if (result == (num_of_thumbs + 1) * -1) {
                     spell_is_back_in_hand = true
                 }
-                else if (result == parseFloat(num_of_thumbs) + 1) {
+                else if (result == num_of_thumbs + 1) {
                     copySpell()
                     for (let i = 0; i < num_of_scoundrel; i++) {
                         treasures++
@@ -130,8 +130,8 @@ function krarkTriggers() {
 }
 
 function magecraftTriggers() {
-    if (num_of_veyren != 0 || num_of_prodegy != 0) {
-        for (let i = 0; i <= parseFloat(num_of_veyren) + parseFloat(num_of_prodegy); i++) {
+    if (num_of_veyren != 0 || num_of_prodigy != 0) {
+        for (let i = 0; i <= num_of_veyren + num_of_prodigy; i++) {
             if (num_of_storm_kiln > 0 || num_of_archmage > 0) {
                 magecraft_plus++
                 for (let i = 0; i < num_of_storm_kiln; i++) {
@@ -175,8 +175,8 @@ function spellCast() {
     krarkTriggers()
 
     if (num_of_thumbs > 0) {
-        for (let i = 0; i < toss.length; i += parseFloat(num_of_thumbs) + 1) {
-            var chunk = toss.slice(i, i + parseFloat(num_of_thumbs) + 1);
+        for (let i = 0; i < toss.length; i += num_of_thumbs + 1) {
+            var chunk = toss.slice(i, i + num_of_thumbs + 1);
             toss_grouped_by_thumb.push(chunk)
         }
         all_tosses.push(toss_grouped_by_thumb)
@@ -186,15 +186,33 @@ function spellCast() {
 }
 
 function popOff() {
-    num_of_krark = document.getElementById('number_of_krark').value
-    num_of_veyren = document.getElementById('number_of_veyren').value
-    num_of_prodegy = document.getElementById('number_of_prodigy').value
-    num_of_storm_kiln = document.getElementById('number_of_storm_kiln').value
-    num_of_archmage = document.getElementById('number_of_archmage').value
-    num_of_bergi = document.getElementById('number_of_bergi').value
-    num_of_scoundrel = document.getElementById('number_of_scoundrel').value
-    num_of_thumbs = document.getElementById('number_of_thumb').value
-    cast_limit = document.getElementById('cast_limit').value
+    if (document.getElementById('number_of_krark').value !== '') {
+        num_of_krark = parseFloat(document.getElementById('number_of_krark').value)
+    }
+    if (document.getElementById('number_of_veyren').value !== '') {
+        num_of_veyren = parseFloat(document.getElementById('number_of_veyren').value)
+    }
+    if (document.getElementById('number_of_prodigy').value !== '') {
+        num_of_prodigy = parseFloat(document.getElementById('number_of_prodigy').value)
+    }
+    if (document.getElementById('number_of_storm_kiln').value !== '') {
+        num_of_storm_kiln = parseFloat(document.getElementById('number_of_storm_kiln').value)
+    }
+    if (document.getElementById('number_of_archmage').value !== '') {
+        num_of_archmage = parseFloat(document.getElementById('number_of_archmage').value)
+    }
+    if (document.getElementById('number_of_bergi').value !== '') {
+        num_of_bergi = parseFloat(document.getElementById('number_of_bergi').value)
+    }
+    if (document.getElementById('number_of_scoundrel').value !== '') {
+        num_of_scoundrel = parseFloat(document.getElementById('number_of_scoundrel').value)
+    }
+    if (document.getElementById('number_of_thumb').value !== '') {
+        num_of_thumbs = parseFloat(document.getElementById('number_of_thumb').value)
+    }
+    if (document.getElementById('cast_limit').value !== '') {
+        cast_limit = parseFloat(document.getElementById('cast_limit').value)
+    }
     for (let i = 0; i < cast_limit; i++) {
         if (spell_is_back_in_hand) {
             spellCast()
@@ -218,15 +236,15 @@ function popOff() {
 function displayTosses() {
     var spell_number = '1'
     var displayed_tosses = document.createElement('div')
-    all_tosses.forEach(function(toss){
+    all_tosses.forEach(function (toss) {
         var toss_element = document.createElement('p')
-        toss_element.innerHTML = 'Cast'+spell_number+':'
-        if(num_of_thumbs > 0){
-            toss.forEach(function(thumb_flips){
-                toss_element.innerHTML = toss_element.innerHTML+'['+thumb_flips+']'
+        toss_element.innerHTML = 'Cast' + spell_number + ':'
+        if (num_of_thumbs > 0) {
+            toss.forEach(function (thumb_flips) {
+                toss_element.innerHTML = toss_element.innerHTML + '[' + thumb_flips + ']'
             })
         } else {
-            toss_element.innerHTML = toss_element.innerHTML+toss
+            toss_element.innerHTML = toss_element.innerHTML + toss
         }
         displayed_tosses.appendChild(toss_element)
         spell_number++
@@ -236,22 +254,22 @@ function displayTosses() {
 
 document.addEventListener('submit', (e) => {
     e.preventDefault()
-    num_of_krark = 0
-    num_of_veyren = 0
-    num_of_prodegy = 0
-    num_of_storm_kiln = 0
-    num_of_archmage = 0
-    num_of_bergi = 0
-    num_of_scoundrel = 0
-    num_of_thumbs = 0
-    storm_count = 0
-    cast_limit = 0
-    treasures = 0
-    blue_mana = 0
-    red_mana = 0
-    magecraft_plus = 0
-    draw_cards = 0
-    num_of_copies = 0
+    num_of_krark = parseFloat(0)
+    num_of_veyren = parseFloat(0)
+    num_of_prodigy = parseFloat(0)
+    num_of_storm_kiln = parseFloat(0)
+    num_of_archmage = parseFloat(0)
+    num_of_bergi = parseFloat(0)
+    num_of_scoundrel = parseFloat(0)
+    num_of_thumbs = parseFloat(0)
+    storm_count = parseFloat(0)
+    cast_limit = parseFloat(0)
+    treasures = parseFloat(0)
+    blue_mana = parseFloat(0)
+    red_mana = parseFloat(0)
+    magecraft_plus = parseFloat(0)
+    draw_cards = parseFloat(0)
+    num_of_copies = parseFloat(0)
     spell_is_back_in_hand = true
     toss = []
     toss_grouped_by_thumb = []
