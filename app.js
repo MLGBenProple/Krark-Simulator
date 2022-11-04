@@ -131,7 +131,7 @@ function krarkTriggers() {
 
 function magecraftTriggers() {
     if (num_of_veyren != 0 || num_of_prodegy != 0) {
-        for (let i = 0; i <= num_of_veyren + num_of_prodegy; i++) {
+        for (let i = 0; i <= parseFloat(num_of_veyren) + parseFloat(num_of_prodegy); i++) {
             if (num_of_storm_kiln > 0 || num_of_archmage > 0) {
                 magecraft_plus++
                 for (let i = 0; i < num_of_storm_kiln; i++) {
