@@ -219,6 +219,12 @@ function popOff() {
         }
     }
 
+    if(spell_is_back_in_hand) {
+        var apply_effects = num_of_copies
+    } else {
+        var apply_effects = num_of_copies + 1
+    }
+
     return {
         'storm_count': storm_count,
         'treasures': treasures,
@@ -226,7 +232,7 @@ function popOff() {
         'red_mana': red_mana,
         'magecraft_triggers': magecraft_plus,
         'draw_cards': draw_cards,
-        'num_of_times_to_apply_effect': num_of_copies + 1,
+        'num_of_times_to_apply_effect': apply_effects,
         'spell_in_hand': spell_is_back_in_hand,
         'tosses': all_tosses,
         'copies': num_of_copies
