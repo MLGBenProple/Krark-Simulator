@@ -57,10 +57,10 @@ function krarkTriggers() {
             for (let i = 0; i < num_of_krark; i++) {
                 if (num_of_thumbs > 0) {
                     var result = tossMultipleCoins(num_of_thumbs)
-                    if (result == (num_of_thumbs + 1) * -1) {
+                    if (result == (parseFloat(num_of_thumbs) + 1) * -1) {
                         spell_is_back_in_hand = true
                     }
-                    else if (result == num_of_thumbs + 1) {
+                    else if (result == parseFloat(num_of_thumbs) + 1) {
                         copySpell()
                         for (let i = 0; i < num_of_scoundrel; i++) {
                             treasures++
