@@ -2,43 +2,55 @@
 </script>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Krark calculator</title>
 </head>
+
 <body>
     <form>
         <input type="number" name="number_of_krark" id="number_of_krark" placeholder="Number of Krark"> <br>
         <input type="number" name="number_of_veyren" id="number_of_veyren" placeholder="Number of Veyren"> <br>
-        <input type="number" name="number_of_prodigy" id="number_of_prodigy" placeholder="Number of Harmonic Prodigy"> <br>
-        <input type="number" name="number_of_storm_kiln" id="number_of_storm_kiln" placeholder="Number of Storm Kiln Artist"> <br>
-        <input type="number" name="number_of_archmage" id="number_of_archmage" placeholder="Number of Archmage Emeritus"> <br>
+        <input type="number" name="number_of_prodigy" id="number_of_prodigy" placeholder="Number of Harmonic Prodigy">
+        <br>
+        <input type="number" name="number_of_storm_kiln" id="number_of_storm_kiln"
+            placeholder="Number of Storm Kiln Artist"> <br>
+        <input type="number" name="number_of_archmage" id="number_of_archmage"
+            placeholder="Number of Archmage Emeritus"> <br>
         <input type="number" name="number_of_bergi" id="number_of_bergi" placeholder="Number of Bergi"> <br>
-        <input type="number" name="number_of_scoundrel" id="number_of_scoundrel" placeholder="Number of Tavern Scoundrel"> <br>
+        <input type="number" name="number_of_scoundrel" id="number_of_scoundrel"
+            placeholder="Number of Tavern Scoundrel"> <br>
         <input type="number" name="number_of_thumb" id="number_of_thumb" placeholder="Number of Krark's Thumb"> <br>
         <input type="number" name="cast_limit" id="cast_limit" placeholder="How many times do you want to try"> <br>
         <input type="submit">
     </form>
-        <div id="results" style="display: none;">
-            <p>Number of Magecraft Triggers (+1/+1): <span id="number_of_magecraft_triggers"></span></p>
-            <p>Number of times the spell is copied: <span id="number_of_copies"></span></p>
-            <p>Ammount of blue mana:<span id="blue_mana"></span></p>
-            <p>Ammount of red mana:<span id="red_mana"></span></p>
-            <p>Ammount of treasure:<span id="treasures"></span></p>
-            <p>Cards drawn:<span id="cards_drawn"></span></p>
-            <p>Apply Effect:<span id="apply_effect"></span></p>
-            <p>Spell in hand:<span id="spell_in_hand"></span></p>
-            <p>Storm count:<span id="storm_count"></span></p>
-            <p>Toss Simulation:</p>
-            <div id="toss_simulation"></div>
-        </div>
+    <div id="results" style="display: none;">
+        <p>Number of Magecraft Triggers (+1/+1): <span id="number_of_magecraft_triggers"></span></p>
+        <p>Number of times the spell is copied: <span id="number_of_copies"></span></p>
+        <p>Ammount of blue mana:<span id="blue_mana"></span></p>
+        <p>Ammount of red mana:<span id="red_mana"></span></p>
+        <p>Ammount of treasure:<span id="treasures"></span></p>
+        <p>Cards drawn:<span id="cards_drawn"></span></p>
+        <p>Apply Effect:<span id="apply_effect"></span></p>
+        <p>Spell in hand:<span id="spell_in_hand"></span></p>
+        <p>Storm count:<span id="storm_count"></span></p>
+        <p>Toss Simulation:</p>
+        <div id="toss_simulation"></div>
+    </div>
 </body>
 <style>
     input {
-        width: 25%;
+        width: 75%;
         margin-bottom: 5px;
+    }
+
+    @media only screen and (min-width: 875px) {
+        input {
+            width: 25%;
+        }
     }
 </style>
 </html>
