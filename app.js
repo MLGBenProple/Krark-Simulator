@@ -108,7 +108,7 @@ function krarkTriggers() {
                         copySpell()
                         for (let i = 0; i < num_of_scoundrel; i++) {
                             treasures++
-                            treasures
+                            treasures++
                         }
                     } else {
                         spell_is_back_in_hand = true
