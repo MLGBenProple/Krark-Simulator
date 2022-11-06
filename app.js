@@ -286,6 +286,7 @@ document.addEventListener('submit', (e) => {
     num_of_veyren = parseFloat(0)
     num_of_prodigy = parseFloat(0)
     num_of_storm_kiln = parseFloat(0)
+    aggressive_thumb_strategy = false
     num_of_archmage = parseFloat(0)
     num_of_bergi = parseFloat(0)
     num_of_scoundrel = parseFloat(0)
