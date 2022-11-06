@@ -6,6 +6,7 @@ var num_of_archmage = parseFloat(0)
 var num_of_bergi = parseFloat(0)
 var num_of_scoundrel = parseFloat(0)
 var num_of_thumbs = parseFloat(0)
+var aggressive_thumb_strategy = false
 var storm_count = parseFloat(0)
 var cast_limit = parseFloat(0)
 var treasures = parseFloat(0)
@@ -57,6 +58,7 @@ function krarkTriggers() {
             for (let i = 0; i < num_of_krark; i++) {
                 if (num_of_thumbs > 0) {
                     var result = tossMultipleCoins(num_of_thumbs)
+
                     if (result == (num_of_thumbs + 1) * -1) {
                         spell_is_back_in_hand = true
                     }
@@ -67,14 +69,22 @@ function krarkTriggers() {
                             treasures++
                         }
                     } else {
-                        if (spell_is_back_in_hand) {
+                        if (aggressive_thumb_strategy) {
                             copySpell()
                             for (let i = 0; i < num_of_scoundrel; i++) {
                                 treasures++
                                 treasures
                             }
                         } else {
-                            spell_is_back_in_hand = true
+                            if (spell_is_back_in_hand) {
+                                copySpell()
+                                for (let i = 0; i < num_of_scoundrel; i++) {
+                                    treasures++
+                                    treasures
+                                }
+                            } else {
+                                spell_is_back_in_hand = true
+                            }
                         }
                     }
                 } else {
@@ -94,6 +104,7 @@ function krarkTriggers() {
         for (let i = 0; i < num_of_krark; i++) {
             if (num_of_thumbs > 0) {
                 var result = tossMultipleCoins(num_of_thumbs)
+
                 if (result == (num_of_thumbs + 1) * -1) {
                     spell_is_back_in_hand = true
                 }
@@ -104,14 +115,22 @@ function krarkTriggers() {
                         treasures++
                     }
                 } else {
-                    if (spell_is_back_in_hand) {
+                    if (aggressive_thumb_strategy) {
                         copySpell()
                         for (let i = 0; i < num_of_scoundrel; i++) {
                             treasures++
-                            treasures++
+                            treasures
                         }
                     } else {
-                        spell_is_back_in_hand = true
+                        if (spell_is_back_in_hand) {
+                            copySpell()
+                            for (let i = 0; i < num_of_scoundrel; i++) {
+                                treasures++
+                                treasures
+                            }
+                        } else {
+                            spell_is_back_in_hand = true
+                        }
                     }
                 }
             } else {
@@ -213,13 +232,16 @@ function popOff() {
     if (document.getElementById('cast_limit').value !== '') {
         cast_limit = parseFloat(document.getElementById('cast_limit').value)
     }
+    if (document.querySelector('#thumb_strategy').checked) {
+        aggressive_thumb_strategy = true
+    }
     for (let i = 0; i < cast_limit; i++) {
         if (spell_is_back_in_hand) {
             spellCast()
         }
     }
 
-    if(spell_is_back_in_hand) {
+    if (spell_is_back_in_hand) {
         var apply_effects = num_of_copies
     } else {
         var apply_effects = num_of_copies + 1

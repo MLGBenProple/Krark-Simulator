@@ -25,6 +25,12 @@
             placeholder="Number of Tavern Scoundrel"> <br>
         <input type="number" name="number_of_thumb" id="number_of_thumb" placeholder="Number of Krark's Thumb"> <br>
         <input type="number" name="cast_limit" id="cast_limit" placeholder="How many times do you want to try"> <br>
+        <div class="flex">
+        <label for="thumb_strategy">Aggressive Thumb Choice?</label>
+        <input type="hidden" name="thumb_strategy" value="false">
+        <input class="checkbox" type="checkbox" name="thumb_strategy" id="thumb_strategy" value="true">
+    </div>
+        <p class="info">If given a combination of heads and tails. Checking this box will tell the application to pick the heads. This may lead to more copies, but alse decreases the chance of the spell still being in your hand at the end of the chain. (The only way the spell can be returned to your hand is if the result of every flip for a single cast is tails)</p>
         <input type="submit">
     </form>
     <div id="results" style="display: none;">
@@ -47,10 +53,30 @@
         margin-bottom: 5px;
     }
 
+    .info {
+        width: 75%;
+        color: grey;
+        font-style: italic;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
     @media only screen and (min-width: 875px) {
         input {
             width: 25%;
         }
+
+        .info {
+            width: 25%;
+        }
+    }
+
+    .flex {
+        display: flex;
+    }
+
+    .checkbox {
+        width: auto;
     }
 </style>
 </html>
