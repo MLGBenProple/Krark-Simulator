@@ -3,7 +3,7 @@ var num_of_veyren = parseFloat(0)
 var num_of_prodigy = parseFloat(0)
 var num_of_storm_kiln = parseFloat(0)
 var num_of_archmage = parseFloat(0)
-var num_of_bergi = parseFloat(0)
+var num_of_birgi = parseFloat(0)
 var num_of_scoundrel = parseFloat(0)
 var num_of_thumbs = parseFloat(0)
 var input_red_mana = parseFloat(0)
@@ -149,12 +149,12 @@ function spellCast() {
     toss_grouped_by_thumb = []
     if (num_of_veyren != 0) {
         for (let i = 0; i <= num_of_veyren; i++) {
-            for (let i = 0; i < num_of_bergi; i++) {
+            for (let i = 0; i < num_of_birgi; i++) {
                 red_mana++
             }
         }
     } else {
-        for (let i = 0; i < num_of_bergi; i++) {
+        for (let i = 0; i < num_of_birgi; i++) {
             red_mana++
         }
     }
@@ -256,8 +256,8 @@ function popOff() {
     if (document.getElementById('number_of_archmage').value !== '') {
         num_of_archmage = parseFloat(document.getElementById('number_of_archmage').value)
     }
-    if (document.getElementById('number_of_bergi').value !== '') {
-        num_of_bergi = parseFloat(document.getElementById('number_of_bergi').value)
+    if (document.getElementById('number_of_birgi').value !== '') {
+        num_of_birgi = parseFloat(document.getElementById('number_of_birgi').value)
     }
     if (document.getElementById('number_of_scoundrel').value !== '') {
         num_of_scoundrel = parseFloat(document.getElementById('number_of_scoundrel').value)
@@ -342,7 +342,7 @@ document.addEventListener('submit', (e) => {
     num_of_storm_kiln = parseFloat(0)
     aggressive_thumb_strategy = false
     num_of_archmage = parseFloat(0)
-    num_of_bergi = parseFloat(0)
+    num_of_birgi = parseFloat(0)
     num_of_scoundrel = parseFloat(0)
     num_of_thumbs = parseFloat(0)
     input_red_mana = parseFloat(0)
