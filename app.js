@@ -120,29 +120,25 @@ function krarkTriggers() {
     }
 }
 
+function resolveMagecraft() {
+    if (num_of_storm_kiln > 0 || num_of_archmage > 0) {
+        magecraft_plus++
+        for (let i = 0; i < num_of_storm_kiln; i++) {
+            treasures++
+        }
+        for (let i = 0; i < num_of_archmage; i++) {
+            draw_cards++
+        }
+    }
+}
+
 function magecraftTriggers() {
     if (num_of_veyren != 0 || num_of_prodigy != 0) {
         for (let i = 0; i <= num_of_veyren + num_of_prodigy; i++) {
-            if (num_of_storm_kiln > 0 || num_of_archmage > 0) {
-                magecraft_plus++
-                for (let i = 0; i < num_of_storm_kiln; i++) {
-                    treasures++
-                }
-                for (let i = 0; i < num_of_archmage; i++) {
-                    draw_cards++
-                }
-            }
+            resolveMagecraft()
         }
     } else {
-        if (num_of_storm_kiln > 0 || num_of_archmage > 0) {
-            magecraft_plus++
-            for (let i = 0; i < num_of_storm_kiln; i++) {
-                treasures++
-            }
-            for (let i = 0; i < num_of_archmage; i++) {
-                draw_cards++
-            }
-        }
+        resolveMagecraft()
     }
 }
 
@@ -176,7 +172,7 @@ function spellCast() {
     }
 }
 
-function spellCastTriggers() {
+function canSpellBeCast() {
     if (input_red_mana !== 0 || input_blue_mana !== 0) {
         if (first_cast) {
             spellCast()
@@ -285,7 +281,7 @@ function popOff() {
     }
     for (let i = 0; i < cast_limit; i++) {
         if (spell_is_back_in_hand) {
-            spellCastTriggers()
+            canSpellBeCast()
         }
     }
 
@@ -293,10 +289,10 @@ function popOff() {
         var apply_effects = num_of_copies
     } else {
         var apply_effects = num_of_copies + 1
-        if(output_red_mana !== 0){
+        if (output_red_mana !== 0) {
             red_mana += output_red_mana
         }
-        if(output_blue_mana !== 0){
+        if (output_blue_mana !== 0) {
             blue_mana += output_blue_mana
         }
     }
