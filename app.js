@@ -6,6 +6,10 @@ var num_of_archmage = parseFloat(0)
 var num_of_bergi = parseFloat(0)
 var num_of_scoundrel = parseFloat(0)
 var num_of_thumbs = parseFloat(0)
+var input_red_mana = parseFloat(0)
+var output_red_mana = parseFloat(0)
+var input_blue_mana = parseFloat(0)
+var output_blue_mana = parseFloat(0)
 var aggressive_thumb_strategy = false
 var storm_count = parseFloat(0)
 var cast_limit = parseFloat(0)
@@ -16,6 +20,7 @@ var magecraft_plus = parseFloat(0)
 var draw_cards = parseFloat(0)
 var num_of_copies = parseFloat(0)
 var spell_is_back_in_hand = true
+var first_cast = true;
 var toss = []
 var toss_grouped_by_thumb = []
 var all_tosses = []
@@ -49,102 +54,69 @@ function tossMultipleCoins(num_of_thumbs) {
 
 function copySpell() {
     num_of_copies++
+    if (output_red_mana !== 0) {
+        red_mana += output_red_mana
+    }
+    if (output_blue_mana !== '') {
+        blue_mana += output_blue_mana
+    }
     magecraftTriggers()
 }
 
-function krarkTriggers() {
-    if (num_of_veyren != 0 || num_of_prodigy != 0) {
-        for (let i = 0; i <= (num_of_veyren + num_of_prodigy); i++) {
-            for (let i = 0; i < num_of_krark; i++) {
-                if (num_of_thumbs > 0) {
-                    var result = tossMultipleCoins(num_of_thumbs)
+function resolveKrarkTriggers() {
+    for (let i = 0; i < num_of_krark; i++) {
+        if (num_of_thumbs > 0) {
+            var result = tossMultipleCoins(num_of_thumbs)
 
-                    if (result == (num_of_thumbs + 1) * -1) {
-                        spell_is_back_in_hand = true
-                    }
-                    else if (result == num_of_thumbs + 1) {
-                        copySpell()
-                        for (let i = 0; i < num_of_scoundrel; i++) {
-                            treasures++
-                            treasures++
-                        }
-                    } else {
-                        if (aggressive_thumb_strategy) {
-                            copySpell()
-                            for (let i = 0; i < num_of_scoundrel; i++) {
-                                treasures++
-                                treasures
-                            }
-                        } else {
-                            if (spell_is_back_in_hand) {
-                                copySpell()
-                                for (let i = 0; i < num_of_scoundrel; i++) {
-                                    treasures++
-                                    treasures
-                                }
-                            } else {
-                                spell_is_back_in_hand = true
-                            }
-                        }
-                    }
-                } else {
-                    if (tossCoin()) {
-                        copySpell()
-                        for (let i = 0; i < num_of_scoundrel; i++) {
-                            treasures++
-                            treasures++
-                        }
-                    } else {
-                        spell_is_back_in_hand = true
-                    }
-                }
+            if (result == (num_of_thumbs + 1) * -1) {
+                spell_is_back_in_hand = true
             }
-        }
-    } else {
-        for (let i = 0; i < num_of_krark; i++) {
-            if (num_of_thumbs > 0) {
-                var result = tossMultipleCoins(num_of_thumbs)
-
-                if (result == (num_of_thumbs + 1) * -1) {
-                    spell_is_back_in_hand = true
+            else if (result == num_of_thumbs + 1) {
+                copySpell()
+                for (let i = 0; i < num_of_scoundrel; i++) {
+                    treasures++
+                    treasures++
                 }
-                else if (result == num_of_thumbs + 1) {
+            } else {
+                if (aggressive_thumb_strategy) {
                     copySpell()
                     for (let i = 0; i < num_of_scoundrel; i++) {
                         treasures++
-                        treasures++
+                        treasures
                     }
                 } else {
-                    if (aggressive_thumb_strategy) {
+                    if (spell_is_back_in_hand) {
                         copySpell()
                         for (let i = 0; i < num_of_scoundrel; i++) {
                             treasures++
                             treasures
                         }
                     } else {
-                        if (spell_is_back_in_hand) {
-                            copySpell()
-                            for (let i = 0; i < num_of_scoundrel; i++) {
-                                treasures++
-                                treasures
-                            }
-                        } else {
-                            spell_is_back_in_hand = true
-                        }
+                        spell_is_back_in_hand = true
                     }
-                }
-            } else {
-                if (tossCoin()) {
-                    copySpell()
-                    for (let i = 0; i < num_of_scoundrel; i++) {
-                        treasures++
-                        treasures++
-                    }
-                } else {
-                    spell_is_back_in_hand = true
                 }
             }
+        } else {
+            if (tossCoin()) {
+                copySpell()
+                for (let i = 0; i < num_of_scoundrel; i++) {
+                    treasures++
+                    treasures++
+                }
+            } else {
+                spell_is_back_in_hand = true
+            }
         }
+    }
+}
+
+function krarkTriggers() {
+    if (num_of_veyren != 0 || num_of_prodigy != 0) {
+        for (let i = 0; i <= (num_of_veyren + num_of_prodigy); i++) {
+            resolveKrarkTriggers()
+        }
+    } else {
+        resolveKrarkTriggers()
     }
 }
 
@@ -204,6 +176,70 @@ function spellCast() {
     }
 }
 
+function spellCastTriggers() {
+    if (input_red_mana !== 0 || input_blue_mana !== 0) {
+        if (first_cast) {
+            spellCast()
+            first_cast = false
+        } else {
+            if (input_red_mana !== 0 && input_blue_mana == 0) {
+                if (red_mana >= input_red_mana) {
+                    red_mana -= input_red_mana
+                    spellCast()
+                    return
+                } else {
+                    if (treasures >= input_red_mana) {
+                        treasures -= input_red_mana
+                        spellCast()
+                        return
+                    }
+                }
+            }
+            if (input_blue_mana !== 0 && input_red_mana == 0) {
+                if (blue_mana >= input_blue_mana) {
+                    blue_mana -= input_blue_mana
+                    spellCast()
+                    return
+                } else {
+                    if (treasures >= input_blue_mana) {
+                        treasures -= input_blue_mana
+                        spellCast()
+                        return
+                    }
+                }
+            } else {
+                var have_blue_mana_to_cast = false
+                var have_red_mana_to_cast = false
+                if (blue_mana >= input_blue_mana) {
+                    blue_mana -= input_blue_mana
+                    have_blue_mana_to_cast = true
+                } else {
+                    if (treasures >= input_blue_mana) {
+                        treasures -= blue_mana
+                        have_blue_mana_to_cast = true
+                    }
+                }
+                if (red_mana >= input_red_mana) {
+                    red_mana -= input_red_mana
+                    have_red_mana_to_cast = true
+                } else {
+                    if (treasures >= input_red_mana) {
+                        treasures -= red_mana
+                        have_red_mana_to_cast = true
+                    }
+                }
+                if (have_blue_mana_to_cast && have_red_mana_to_cast) {
+                    spellCast()
+                    return
+                }
+            }
+        }
+    } else {
+        spellCast()
+        return
+    }
+}
+
 function popOff() {
     if (document.getElementById('number_of_krark').value !== '') {
         num_of_krark = parseFloat(document.getElementById('number_of_krark').value)
@@ -229,6 +265,18 @@ function popOff() {
     if (document.getElementById('number_of_thumb').value !== '') {
         num_of_thumbs = parseFloat(document.getElementById('number_of_thumb').value)
     }
+    if (document.getElementById('input_red_mana').value !== '') {
+        input_red_mana = parseFloat(document.getElementById('input_red_mana').value)
+    }
+    if (document.getElementById('output_red_mana').value !== '') {
+        output_red_mana = parseFloat(document.getElementById('output_red_mana').value)
+    }
+    if (document.getElementById('input_blue_mana').value !== '') {
+        input_blue_mana = parseFloat(document.getElementById('input_blue_mana').value)
+    }
+    if (document.getElementById('output_blue_mana').value !== '') {
+        output_blue_mana = parseFloat(document.getElementById('output_blue_mana').value)
+    }
     if (document.getElementById('cast_limit').value !== '') {
         cast_limit = parseFloat(document.getElementById('cast_limit').value)
     }
@@ -237,7 +285,7 @@ function popOff() {
     }
     for (let i = 0; i < cast_limit; i++) {
         if (spell_is_back_in_hand) {
-            spellCast()
+            spellCastTriggers()
         }
     }
 
@@ -245,6 +293,12 @@ function popOff() {
         var apply_effects = num_of_copies
     } else {
         var apply_effects = num_of_copies + 1
+        if(output_red_mana !== 0){
+            red_mana += output_red_mana
+        }
+        if(output_blue_mana !== 0){
+            blue_mana += output_blue_mana
+        }
     }
 
     return {
@@ -291,6 +345,10 @@ document.addEventListener('submit', (e) => {
     num_of_bergi = parseFloat(0)
     num_of_scoundrel = parseFloat(0)
     num_of_thumbs = parseFloat(0)
+    input_red_mana = parseFloat(0)
+    output_red_mana = parseFloat(0)
+    input_blue_mana = parseFloat(0)
+    output_blue_mana = parseFloat(0)
     storm_count = parseFloat(0)
     cast_limit = parseFloat(0)
     treasures = parseFloat(0)
@@ -300,6 +358,7 @@ document.addEventListener('submit', (e) => {
     draw_cards = parseFloat(0)
     num_of_copies = parseFloat(0)
     spell_is_back_in_hand = true
+    first_cast = true
     toss = []
     toss_grouped_by_thumb = []
     all_tosses = []
@@ -316,4 +375,16 @@ document.addEventListener('submit', (e) => {
     document.getElementById('number_of_copies').innerHTML = result.copies
     document.getElementById('toss_simulation').appendChild(displayTosses())
     document.getElementById('results').style.display = "block"
+})
+
+document.addEventListener("DOMContentLoaded", function (event) {
+    document.getElementById('number_of_thumb').addEventListener('blur', function () {
+        if (document.getElementById('number_of_thumb').value !== '') {
+            document.getElementById('thumb_choice').style.display = "block";
+            document.getElementById('thumb_choice_info').style.display = "block";
+        } else {
+            document.getElementById('thumb_choice').style.display = "none";
+            document.getElementById('thumb_choice_info').style.display = "none";
+        }
+    })
 })
