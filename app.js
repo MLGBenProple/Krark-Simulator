@@ -183,47 +183,51 @@ function canSpellBeCast() {
                     red_mana -= input_red_mana
                     spellCast()
                     return
-                } else {
-                    if (treasures >= input_red_mana) {
-                        treasures -= input_red_mana
-                        spellCast()
-                        return
-                    }
-                }
+                } 
+                // else {
+                //     if (treasures >= input_red_mana) {
+                //         treasures -= input_red_mana
+                //         spellCast()
+                //         return
+                //     }
+                // }
             }
             if (input_blue_mana !== 0 && input_red_mana == 0) {
                 if (blue_mana >= input_blue_mana) {
                     blue_mana -= input_blue_mana
                     spellCast()
                     return
-                } else {
-                    if (treasures >= input_blue_mana) {
-                        treasures -= input_blue_mana
-                        spellCast()
-                        return
-                    }
-                }
+                } 
+                // else {
+                //     if (treasures >= input_blue_mana) {
+                //         treasures -= input_blue_mana
+                //         spellCast()
+                //         return
+                //     }
+                // }
             } else {
                 var have_blue_mana_to_cast = false
                 var have_red_mana_to_cast = false
                 if (blue_mana >= input_blue_mana) {
                     blue_mana -= input_blue_mana
                     have_blue_mana_to_cast = true
-                } else {
-                    if (treasures >= input_blue_mana) {
-                        treasures -= blue_mana
-                        have_blue_mana_to_cast = true
-                    }
-                }
+                } 
+                // else {
+                //     if (treasures >= input_blue_mana) {
+                //         treasures -= blue_mana
+                //         have_blue_mana_to_cast = true
+                //     }
+                // }
                 if (red_mana >= input_red_mana) {
                     red_mana -= input_red_mana
                     have_red_mana_to_cast = true
-                } else {
-                    if (treasures >= input_red_mana) {
-                        treasures -= red_mana
-                        have_red_mana_to_cast = true
-                    }
-                }
+                } 
+                // else {
+                //     if (treasures >= input_red_mana) {
+                //         treasures -= red_mana
+                //         have_red_mana_to_cast = true
+                //     }
+                // }
                 if (have_blue_mana_to_cast && have_red_mana_to_cast) {
                     spellCast()
                     return
