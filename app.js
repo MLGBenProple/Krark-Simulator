@@ -1,5 +1,5 @@
 var num_of_krark = parseFloat(0)
-var num_of_veyren = parseFloat(0)
+var num_of_veyran = parseFloat(0)
 var num_of_prodigy = parseFloat(0)
 var num_of_storm_kiln = parseFloat(0)
 var num_of_archmage = parseFloat(0)
@@ -111,8 +111,8 @@ function resolveKrarkTriggers() {
 }
 
 function krarkTriggers() {
-    if (num_of_veyren != 0 || num_of_prodigy != 0) {
-        for (let i = 0; i <= (num_of_veyren + num_of_prodigy); i++) {
+    if (num_of_veyran != 0 || num_of_prodigy != 0) {
+        for (let i = 0; i <= (num_of_veyran + num_of_prodigy); i++) {
             resolveKrarkTriggers()
         }
     } else {
@@ -133,8 +133,8 @@ function resolveMagecraft() {
 }
 
 function magecraftTriggers() {
-    if (num_of_veyren != 0 || num_of_prodigy != 0) {
-        for (let i = 0; i <= num_of_veyren + num_of_prodigy; i++) {
+    if (num_of_veyran != 0 || num_of_prodigy != 0) {
+        for (let i = 0; i <= num_of_veyran + num_of_prodigy; i++) {
             resolveMagecraft()
         }
     } else {
@@ -147,8 +147,8 @@ function spellCast() {
     spell_is_back_in_hand = false
     toss = []
     toss_grouped_by_thumb = []
-    if (num_of_veyren != 0) {
-        for (let i = 0; i <= num_of_veyren; i++) {
+    if (num_of_veyran != 0) {
+        for (let i = 0; i <= num_of_veyran; i++) {
             for (let i = 0; i < num_of_birgi; i++) {
                 red_mana++
             }
@@ -244,8 +244,8 @@ function popOff() {
     if (document.getElementById('number_of_krark').value !== '') {
         num_of_krark = parseFloat(document.getElementById('number_of_krark').value)
     }
-    if (document.getElementById('number_of_veyren').value !== '') {
-        num_of_veyren = parseFloat(document.getElementById('number_of_veyren').value)
+    if (document.getElementById('number_of_veyran').value !== '') {
+        num_of_veyran = parseFloat(document.getElementById('number_of_veyran').value)
     }
     if (document.getElementById('number_of_prodigy').value !== '') {
         num_of_prodigy = parseFloat(document.getElementById('number_of_prodigy').value)
@@ -337,7 +337,7 @@ function displayTosses() {
 document.addEventListener('submit', (e) => {
     e.preventDefault()
     num_of_krark = parseFloat(0)
-    num_of_veyren = parseFloat(0)
+    num_of_veyran = parseFloat(0)
     num_of_prodigy = parseFloat(0)
     num_of_storm_kiln = parseFloat(0)
     aggressive_thumb_strategy = false
